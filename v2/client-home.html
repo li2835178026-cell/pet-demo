@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>宠伴 · 圆圆的梦核宇宙</title>
+  <style>
+    :root{--ink:#173d27;--green:#1f4d2e;--cream:#f7f5ef;--orange:#ff7a3d;--violet:#8b5cf6}
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;color:var(--ink)}
+    body{min-height:100svh;overflow:hidden;background:linear-gradient(145deg,#edebf4 0%,#e8e3f0 45%,#dfdcec 100%)}
+    body:after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.045;z-index:20;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E")}
+    button{font:inherit;color:inherit}.app{position:relative;isolation:isolate;width:min(100%,430px);height:100svh;min-height:680px;margin:auto;padding:calc(18px + env(safe-area-inset-top)) 22px calc(22px + env(safe-area-inset-bottom));display:flex;flex-direction:column;overflow:hidden}
+    .glow{position:absolute;border-radius:50%;filter:blur(2px);z-index:-2;animation:drift 8s ease-in-out infinite alternate}.glow.one{width:330px;height:330px;left:-130px;top:13%;background:radial-gradient(circle,rgba(230,224,242,.9),transparent 68%)}.glow.two{width:280px;height:280px;right:-120px;top:29%;background:radial-gradient(circle,rgba(255,217,160,.45),transparent 68%);animation-delay:-3s}
+    .orb{position:absolute;width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 16px 6px rgba(255,255,255,.52);animation:float 6s ease-in-out infinite}.o1{top:20%;left:15%}.o2{top:39%;right:12%;animation-delay:-2s}.o3{top:54%;left:8%;width:3px;height:3px;animation-delay:-4s}
+    header{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;z-index:3}.round-btn,.avatar{width:42px;height:42px;border:1px solid rgba(31,77,46,.1);background:rgba(247,245,239,.58);backdrop-filter:blur(13px);box-shadow:0 10px 28px rgba(63,49,91,.1);border-radius:50%;display:grid;place-items:center}.round-btn{padding:0;cursor:pointer}.menu{width:17px;height:12px;display:flex;flex-direction:column;justify-content:space-between}.menu i{height:1.5px;background:var(--green);border-radius:4px}.menu i:nth-child(2){width:11px}.wordmark{text-align:center;font-weight:800;letter-spacing:.22em;font-size:18px;padding-left:.22em}.avatar{justify-self:end;background:linear-gradient(145deg,#fff8ed,#e8dff2);position:relative}.avatar:before{content:"";width:15px;height:15px;border-radius:50%;background:#d3c9dc;box-shadow:0 12px 0 5px #d3c9dc}
+    .hero{display:flex;flex:1;flex-direction:column;align-items:center;justify-content:center;padding-bottom:88px}.world{position:relative;width:270px;height:260px;display:grid;place-items:center;margin-top:8px}.halo{position:absolute;width:212px;height:212px;border-radius:50%;background:radial-gradient(circle at 45% 38%,rgba(255,245,222,.95),rgba(255,217,160,.48) 43%,rgba(230,224,242,.05) 72%);filter:blur(1px);box-shadow:0 35px 65px rgba(67,48,91,.16)}.orbit{position:absolute;width:270px;height:104px;border:1px solid rgba(31,77,46,.28);border-radius:50%;transform:rotate(-10deg);animation:orbit 7s ease-in-out infinite alternate}.orbit:after{content:"";position:absolute;width:8px;height:8px;border-radius:50%;background:#fff6c9;right:30px;top:6px;box-shadow:0 0 12px 5px rgba(255,217,160,.65)}
+    .cat{position:relative;width:205px;filter:drop-shadow(0 22px 18px rgba(74,47,38,.19));animation:breathe 5s ease-in-out infinite;z-index:2}.sticker{position:absolute;right:-2px;top:38px;z-index:3;padding:7px 11px;background:#f7f5ef;border:3px solid #fff;border-radius:99px;font-size:11px;font-weight:800;transform:rotate(3deg);box-shadow:4px 5px 0 rgba(31,77,46,.78)}
+    .copy{width:100%;margin-top:3px}.eyebrow{display:flex;align-items:center;gap:9px;font-size:10px;letter-spacing:.2em;font-weight:800;color:rgba(31,77,46,.56);text-transform:uppercase}.eyebrow:before{content:"";width:28px;height:1px;background:currentColor}.copy h1{font-size:clamp(36px,10vw,42px);line-height:1.08;letter-spacing:-.06em;margin:9px 0 11px;color:#173d27}.copy p{margin:0;color:rgba(23,61,39,.62);font-size:15px;letter-spacing:.02em}.outline{position:absolute;right:-7px;bottom:179px;font-size:60px;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.45);font-weight:900;letter-spacing:-.08em;z-index:-1}
+    .composer{position:absolute;left:22px;right:22px;bottom:calc(22px + env(safe-area-inset-bottom));height:66px;display:grid;grid-template-columns:44px 1fr 48px;align-items:center;gap:9px;padding:9px 10px;background:rgba(247,245,239,.78);border:1px solid rgba(255,255,255,.74);border-radius:33px;box-shadow:0 23px 55px rgba(49,38,70,.2),inset 0 1px 0 rgba(255,255,255,.84);backdrop-filter:blur(20px);z-index:5}.plus{width:42px;height:42px;border:0;border-radius:50%;background:rgba(255,255,255,.73);font-size:26px;font-weight:300;cursor:pointer}.prompt{color:rgba(23,61,39,.45);font-size:15px}.voice{border:0;width:48px;height:48px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;gap:2px;box-shadow:0 8px 18px rgba(31,77,46,.27);cursor:pointer}.voice i{width:2px;border-radius:4px;background:#fff}.voice i:nth-child(1),.voice i:nth-child(5){height:8px}.voice i:nth-child(2),.voice i:nth-child(4){height:15px}.voice i:nth-child(3){height:21px}
+    @keyframes drift{to{transform:translate(22px,-16px) scale(1.06)}}@keyframes float{50%{transform:translateY(-13px);opacity:.5}}@keyframes orbit{to{transform:rotate(-5deg) translateY(-5px)}}@keyframes breathe{50%{transform:translateY(-7px) rotate(.5deg)}}
+    @media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+<main class="app">
+  <div class="glow one"></div><div class="glow two"></div><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i>
+  <header><button class="round-btn" aria-label="打开菜单"><span class="menu"><i></i><i></i><i></i></span></button><div class="wordmark">宠伴</div><div class="avatar" aria-label="头像占位"></div></header>
+  <section class="hero">
+    <div class="world"><div class="halo"></div><div class="orbit"></div><span class="sticker">YUANYUAN ✦</span>
+      <svg class="cat" viewBox="0 0 240 240" role="img" aria-label="原创橘白猫圆圆">
+        <defs><linearGradient id="fur" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffad62"/><stop offset="1" stop-color="#ed6a35"/></linearGradient><linearGradient id="cream" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fffdf7"/><stop offset="1" stop-color="#f1e5d4"/></linearGradient></defs>
+        <path d="M56 93Q42 43 80 65Q98 43 120 45Q146 43 163 65Q202 43 184 98Z" fill="url(#fur)"/>
+        <path d="M66 78L57 54Q79 61 85 70M155 70Q166 60 183 54L175 82" fill="#f8c18d"/>
+        <path d="M54 105Q57 60 119 58Q183 59 188 108L181 153Q169 190 121 193Q71 192 57 153Z" fill="url(#fur)"/>
+        <path d="M88 66Q105 55 119 59Q138 56 153 68L146 103Q121 118 94 101Z" fill="url(#cream)"/>
+        <path d="M76 121Q85 96 107 106Q120 114 132 106Q157 96 166 122L160 157Q145 179 121 180Q95 179 80 158Z" fill="url(#cream)"/>
+        <path d="M57 151Q37 178 63 192Q81 199 88 179" fill="none" stroke="#ed6a35" stroke-width="18" stroke-linecap="round"/>
+        <ellipse cx="91" cy="123" rx="6" ry="8" fill="#293c30"/><ellipse cx="149" cy="123" rx="6" ry="8" fill="#293c30"/><circle cx="93" cy="120" r="2" fill="#fff"/><circle cx="151" cy="120" r="2" fill="#fff"/>
+        <ellipse cx="75" cy="143" rx="12" ry="7" fill="#f59a91" opacity=".6"/><ellipse cx="166" cy="143" rx="12" ry="7" fill="#f59a91" opacity=".6"/>
+        <path d="M116 137Q121 132 126 137Q124 143 121 143Q117 142 116 137Z" fill="#be685f"/><path d="M121 143Q113 151 106 145M121 143Q128 151 136 145" fill="none" stroke="#744f43" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M90 164Q121 178 151 163" fill="none" stroke="#f0d9c1" stroke-width="5" stroke-linecap="round" opacity=".85"/>
+      </svg>
+    </div>
+    <div class="copy"><div class="eyebrow">pet companion universe</div><h1>昂，晚上好</h1><p>今天想为圆圆安排什么？</p></div>
+  </section>
+  <div class="outline" aria-hidden="true">01</div>
+  <div class="composer"><button class="plus" aria-label="添加内容">+</button><span class="prompt">和我说说…</span><button class="voice" aria-label="语音输入"><i></i><i></i><i></i><i></i><i></i></button></div>
+</main>
+</body></html>
