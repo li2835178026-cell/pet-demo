@@ -1,0 +1,15 @@
+usage: python -m skilltrain forward [-h] --work WORK --out OUT --pool POOL
+                                    --first FIRST --last LAST [--model MODEL]
+                                    [--timeout TIMEOUT]
+
+Give the writer the noised story and the memory pool, and ask for screenplays.
+
+options:
+  -h, --help         show this help message and exit
+  --work WORK
+  --out OUT
+  --pool POOL
+  --first FIRST
+  --last LAST
+  --model MODEL
+  --timeout TIMEOUT

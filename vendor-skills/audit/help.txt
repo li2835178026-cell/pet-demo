@@ -1,0 +1,21 @@
+usage: python -m skilltrain [-h]
+                            [{prepare,diffuse,forward,loss,backward,train}]
+
+Skill Training: learn a skill library without updating model weights.
+
+positional arguments:
+  {prepare,diffuse,forward,loss,backward,train}
+                        workflow to run
+
+options:
+  -h, --help            show this help message and exit
+
+Commands:
+  prepare    Extract text and split it into episodes
+  diffuse    Build story outlines from human scripts
+  forward    Reconstruct scripts using the skill library
+  loss       Compare reconstructions with human scripts
+  backward   Update the skill library from feedback
+  train      Run or resume the complete training loop
+
+Run python -m skilltrain <command> --help for stage options.

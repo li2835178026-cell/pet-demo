@@ -1,0 +1,17 @@
+usage: python -m skilltrain diffuse [-h] --work WORK [--noise {light,heavy}]
+                                    [--only N] [--force] [--model MODEL]
+                                    [--workers WORKERS] [--timeout TIMEOUT]
+
+Take the human screenplay apart and rebuild it as a plain prose summary: the
+
+options:
+  -h, --help            show this help message and exit
+  --work WORK           data directory holding human/epNN.txt
+  --noise {light,heavy}
+                        how much of the craft to strip (default: heavy)
+  --only N              try one episode and print it, without writing
+                        story.md; repeat for several
+  --force               ignore the cache
+  --model MODEL         passed through to the CLI
+  --workers WORKERS
+  --timeout TIMEOUT

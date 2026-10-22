@@ -1,0 +1,15 @@
+usage: python -m skilltrain loss [-h] --work WORK --scripts SCRIPTS --out OUT
+                                 --first FIRST --last LAST [--model MODEL]
+                                 [--timeout TIMEOUT]
+
+Put the model's screenplay next to the human original and write up how they
+
+options:
+  -h, --help         show this help message and exit
+  --work WORK
+  --scripts SCRIPTS
+  --out OUT
+  --first FIRST
+  --last LAST
+  --model MODEL
+  --timeout TIMEOUT

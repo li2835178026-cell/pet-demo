@@ -1,0 +1,19 @@
+[project]
+name = "skill-training"
+version = "0.1.0"
+description = "Train an agent's skill library through corruption and reconstruction, without updating model weights"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "PolyForm-Noncommercial-1.0.0" }
+# No third-party packages, on purpose. The only thing this project needs that
+# is not in the standard library is the `claude` CLI, and that is a binary, not
+# an import. Nothing here has to be kept in step with an SDK release.
+dependencies = []
+
+[project.urls]
+Homepage = "https://skilltraining-project.github.io/"
+Repository = "https://github.com/skilltraining-project/skill-training"
+Paper = "https://arxiv.org/abs/2607.27557"
+
+[tool.ruff]
+line-length = 96
