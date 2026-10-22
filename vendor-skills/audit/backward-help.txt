@@ -1,0 +1,15 @@
+usage: python -m skilltrain backward [-h] --batch BATCH --pool POOL --out OUT
+                                     [--label LABEL] [--summary SUMMARY]
+                                     [--model MODEL] [--timeout TIMEOUT]
+
+One agent reads this step's loss reports together with the read traces that go
+
+options:
+  -h, --help         show this help message and exit
+  --batch BATCH
+  --pool POOL
+  --out OUT
+  --label LABEL
+  --summary SUMMARY  a commonality report from reduce, if there is one
+  --model MODEL
+  --timeout TIMEOUT

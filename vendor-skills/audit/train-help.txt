@@ -1,0 +1,32 @@
+usage: python -m skilltrain train [-h] --work WORKS [--steps STEPS]
+                                  [--episodes-per-step EPISODES_PER_STEP]
+                                  [--epochs EPOCHS] [--workers WORKERS]
+                                  [--group-size GROUP_SIZE] [--no-backward]
+                                  [--init-pool INIT_POOL] [--model MODEL]
+                                  [--runs-dir RUNS_DIR] [--run-id RUN_ID]
+                                  [--forward-timeout FORWARD_TIMEOUT]
+                                  [--loss-timeout LOSS_TIMEOUT]
+                                  [--backward-timeout BACKWARD_TIMEOUT]
+
+Runs the other four in the order that makes them a training loop:
+
+options:
+  -h, --help            show this help message and exit
+  --work WORKS          data directory; repeat for a batch
+  --steps STEPS
+  --episodes-per-step EPISODES_PER_STEP
+  --epochs EPOCHS
+  --workers WORKERS     works running forward+loss at once
+  --group-size GROUP_SIZE
+                        works per backward micro-step; 0 puts every work in
+                        one
+  --no-backward         freeze the pool: no backward pass, no updates
+  --init-pool INIT_POOL
+                        start from a copy of an existing memory/ pool; with
+                        --no-backward this is the frozen-pool control
+  --model MODEL         passed through to the CLI
+  --runs-dir RUNS_DIR
+  --run-id RUN_ID       default: derived from the settings
+  --forward-timeout FORWARD_TIMEOUT
+  --loss-timeout LOSS_TIMEOUT
+  --backward-timeout BACKWARD_TIMEOUT

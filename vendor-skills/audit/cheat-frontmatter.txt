@@ -1,0 +1,119 @@
+vendor-skills/cheat-on-content/skills/cheat-bump/SKILL.md
+---
+name: cheat-bump
+description: 提议并执行 rubric 或 bucket 升级。两种模式：**完整 rubric bump**（最高风险动作，5 步强制 + 跨模型审核）和 **--bucket-only 轻量重校**（只换 bucket 边界，不动 rubric 公式）。**Phase 2 强制走 cheat-score-blind sub-agent 给校准池重打分**——不接受 self-scored fallback。触发词："升级 rubric"/"bump rubric"/"更新公式"/"我想加一个维度"/"调整权重"/"重校桶"/"recalibrate bucket"。
+argument-hint: --propose "<...>" | --bucket-only [--scheme ratio|absolute|percentile]
+allowed-tools: Bash(*), Read, Write, Edit, Glob, Grep, Skill, Task, mcp__llm-chat__chat
+---
+
+vendor-skills/cheat-on-content/skills/cheat-init/SKILL.md
+---
+name: cheat-init
+description: cheat-on-content 的首次 onboarding 与脚手架创建器。统一流程——所有用户都走相同 5 阶段闭环，唯一区别是"发过视频的人"会在 init 时多一步：抓取已有视频建立历史 context（用于后续 cheat-seed 给更贴合的选题、更准的 baseline）。触发词："初始化"/"init"/"首次使用"/"我是新用户"/"setup cheat-on-content"。**必须在用户第一次会话执行；其他子 skill 在 .cheat-state.json 不存在时自动路由到此。**
+argument-hint: "[— form: opinion-video|long-essay|short-text|podcast]"
+allowed-tools: Bash(*), Read, Write, Edit, Glob, WebFetch, Skill
+---
+
+vendor-skills/cheat-on-content/skills/cheat-learn-from/SKILL.md
+---
+name: cheat-learn-from
+description: 从对标账号导入 script + 数据 → 拆 pattern + 派生 base rubric 信号 → 写到 benchmark.md / script_patterns.md / rubric_notes.md。**这是工具最早期信号的来源**——cold-start 用户没自己历史时全靠对标，发过历史的用户也建议至少 1 个对标做 sanity check。触发词："学这个账号"/"拆这几个对标视频"/"learn from"/"导入对标账号"/"找对标"。
+argument-hint: <账号名> [— way: a (default) | b] [— append | --replace]
+allowed-tools: Bash(*), Read, Write, Edit, Glob, WebFetch, Skill
+---
+
+vendor-skills/cheat-on-content/skills/cheat-migrate/SKILL.md
+---
+name: cheat-migrate
+description: 把老用户的 .cheat-state.json 升级到当前 schema_version。读 migrations/registry.md 算迁移链，按顺序应用每一步迁移文件。幂等：跑两次结果一样。失败停在中间版本不前进。触发词："迁移"/"升级 state"/"migrate"/"我的 state 是老版本"/"schema 版本不对"。
+argument-hint: "[— from: <version>] [— to: <version>] [— dry-run]"
+allowed-tools: Bash(*), Read, Write, Edit, Skill
+---
+
+vendor-skills/cheat-on-content/skills/cheat-persona/SKILL.md
+---
+name: cheat-persona
+description: 从复盘评论数据派生 / 刷新账号的受众画像，写入 audience.md。这是和 rubric 平行的第二个派生物——rubric 答"怎么打分"，persona 答"谁在看"。cheat-seed 选题 / 写稿时读它。**audience.md 含实绩信号，cheat-score-blind 硬禁读**。触发词："构造受众画像"/"更新 persona"/"我的观众是谁"/"build persona"/"刷新受众画像"/"看看我的受众画像"。
+argument-hint: "[— seed-from-benchmark] [— rebuild]"
+allowed-tools: Bash(*), Read, Write, Edit, Glob, Grep
+---
+
+vendor-skills/cheat-on-content/skills/cheat-predict/SKILL.md
+---
+name: cheat-predict
+description: 给最终稿写一份 immutable 盲预测日志。这是 cheat-on-content 整个校准循环的核心动作——预测段一旦写完不可改，由 hook 强制。**自动检测**：如目标文件已有 `## 预测` / `## 预测 v1` 段（被 cheat-shoot 调用走 v2 模式），改成 append `## 预测 v2` 而非覆盖。**打分通过 Task tool 委派给 `cheat-score-blind` sub-agent**（context-isolated channel B），主 Claude review 后落盘。触发词："启动预测"/"start prediction"/"给这稿子打分并预测"/"写预测日志"。
+argument-hint: <script-path> [— mode: v1|v2] [— prediction-file: <path>] [— skip-blind]
+allowed-tools: Bash(*), Read, Write, Edit, Glob, Task
+---
+
+vendor-skills/cheat-on-content/skills/cheat-publish/SKILL.md
+---
+name: cheat-publish
+description: 登记一篇内容已发布，把 URL/平台 ID/发布时间写入对应预测文件 header 和 state file。这是一个轻量动作——只更新元数据，**不动预测段任何字符**。触发词："已发布"/"I shipped"/"发布链接是 X"/"刚发完 [url]"/"publish registered"。
+argument-hint: <prediction-file-or-url> [— platform: youtube|bilibili|douyin|...]
+allowed-tools: Bash(*), Read, Edit, Glob
+---
+
+vendor-skills/cheat-on-content/skills/cheat-recommend/SKILL.md
+---
+name: cheat-recommend
+description: 从 candidates.md 里按当前 rubric 排序推荐 top N 选题，每条带 composite + 一句 rationale + 锚点对比。**candidates 不存在时给引导而非报错**。触发词："推荐选题"/"next topic"/"下一篇做什么"/"recommend topics"/"挑一个选题"。
+argument-hint: "[— top: N] [— filter: tier1|all|safe|risky]"
+allowed-tools: Read, Glob, Grep
+---
+
+vendor-skills/cheat-on-content/skills/cheat-retro/SKILL.md
+---
+name: cheat-retro
+description: T+N 天数据回收 + 复盘 + 把实绩观察写入 rubric-memo.md。这是校准循环的反馈环节——不复盘的预测等于占星。触发词："复盘 [path]"/"retro this"/"T+3d 数据来了"/"抓数据 [path]"/"把这篇复盘了"。
+argument-hint: <prediction-file> [— window: 3|5|7] [— source: manual|adapter]
+allowed-tools: Bash(*), Read, Edit, Write, Glob, Grep, Skill
+---
+
+vendor-skills/cheat-on-content/skills/cheat-score/SKILL.md
+---
+name: cheat-score
+description: 给单篇稿子打 rubric 分。**只在控制台输出，不写文件，不预测**。触发词："打分这篇 [path]"/"score this [path]"/"给这稿子打分"/"先打分看看"。是 cheat-predict 之前的轻量探索动作。
+argument-hint: <draft-path>
+allowed-tools: Read, Glob, Grep
+---
+
+vendor-skills/cheat-on-content/skills/cheat-score-blind/SKILL.md
+---
+name: cheat-score-blind
+description: |
+  INTERNAL sub-agent for blind 7-dim rubric scoring. **NOT a user-facing skill — do NOT invoke from main conversation.** Called via Task tool by cheat-score / cheat-predict / cheat-bump to get a context-isolated score on a script. Receives ONLY script_path + rubric_notes_path; refuses any other input. Outputs strict JSON: 9 dimensions × {score 0-5, confidence enum, one-line reason}. **Hard refuses to Read** .cheat-state.json, predictions/*, retro 段, or anything that could leak post-publish data. This is channel B in the 3-channel calibration model (A=main, B=blind sub, C=cross-model).
+allowed-tools: Read, Glob, Grep
+argument-hint: <script-path> <rubric-notes-path>
+---
+
+vendor-skills/cheat-on-content/skills/cheat-seed/SKILL.md
+---
+name: cheat-seed
+description: 跟用户对话讨论选题——**默认一次一个**，用户主动给主题或经历，AI 围绕用户的输入深挖、提炼角度、写一份 draft。不是 AI 拿三个开放问题追用户，也不是一次给 5 个候选。触发词："找选题"/"我想做一条 X"/"最近有个想法"/"seed"/"启动种子"。可选 batch 模式：`/cheat-seed --batch 5` 走旧的 brainstorm 5 候选 + 写 5 draft 流程。
+argument-hint: "[— batch: N] [— sources: <comma-separated>]"
+allowed-tools: Bash(*), Read, Write, Edit, Glob, WebFetch, Skill
+---
+
+vendor-skills/cheat-on-content/skills/cheat-shoot/SKILL.md
+---
+name: cheat-shoot
+description: 登记一条视频已拍摄。**建 video folder + 询问实际拍摄稿是否与 scripts/<id>.md 一致 + buffer +1**。与 cheat-publish 配对：拍了进队列，发了出队列。触发词："拍了"/"拍了 X"/"shot"/"shot it"/"已拍 X"/"录完了"。
+argument-hint: <scripts-path-or-id>
+allowed-tools: Bash(*), Read, Write, Edit, Glob
+---
+
+vendor-skills/cheat-on-content/skills/cheat-status/SKILL.md
+---
+name: cheat-status
+description: cheat-on-content 的状态看板。显示当前模式 / rubric 版本 / 校准进度 / 待复盘 / pool 状态 / 是否该升级 SQLite / 是否该 bump rubric。**任何时候都可调，无副作用**。触发词："状态"/"看板"/"status"/"我现在该做什么"/"进度怎么样"。
+allowed-tools: Bash(*), Read, Glob, Grep
+---
+
+vendor-skills/cheat-on-content/skills/cheat-trends/SKILL.md
+---
+name: cheat-trends
+description: 从配置的热点源（HN / Reddit / YouTube trending / B 站热门 / 等）抓今天的热门话题，去重 + 粗打分 + 写入 candidates.md。**绝大部分人没有候选池——这是让"我没素材"问题在 onboarding 第二步就消失的钥匙**。触发词："抓热点"/"fetch trends"/"今天有什么可做的"/"trending now"/"找选题"。
+argument-hint: "[— sources: <comma-separated>] [— max-per: 20]"
+allowed-tools: Bash(*), Read, Write, Edit, Glob, WebFetch, Skill
+---

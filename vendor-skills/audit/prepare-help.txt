@@ -1,0 +1,12 @@
+usage: python -m skilltrain prepare [-h] (--pdf PDF | --text TEXT)
+                                    [--work WORK] [--episodes EPISODES]
+
+A feature screenplay is one long document. This loop wants a series. The
+script
+
+options:
+  -h, --help           show this help message and exit
+  --pdf PDF
+  --text TEXT
+  --work WORK          output directory (default: alongside the source)
+  --episodes EPISODES

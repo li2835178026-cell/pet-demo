@@ -1,0 +1,10 @@
+{
+  "cheat-on-content": {
+    "url": "https://github.com/XBuilderLAB/cheat-on-content",
+    "commit": "5e8fb6ffb8a0f67f8456348ee08932c93e93abf5"
+  },
+  "skill-training": {
+    "url": "https://github.com/skilltraining-project/skill-training",
+    "commit": "f9d6d6b31786b03fba4ac4898ed61dc820776832"
+  }
+}

@@ -1,0 +1,14 @@
+[forward] FAILED: the writer opened material it was not supposed to see, so this pass is not a closed-book result:
+  /runs/demo/loss/epoch_00/step_00/example.md
+[forward] FAILED: the writer opened material it was not supposed to see, so this pass is not a closed-book result:
+  /tmp/tmp70ueta8z/data/example/human/ep01.txt
+MEMORY_LINT_OK entries=1
+MEMORY_LINT_OK entries=1
+[pool] seeded 1 entries from /tmp/tmp85bc6lez/trained
+MEMORY_LINT_OK entries=1
+[pool] seeded 1 entries from /tmp/tmpc2z1_qe1/trained
+............................................................
+----------------------------------------------------------------------
+Ran 60 tests in 1.128s
+
+OK
